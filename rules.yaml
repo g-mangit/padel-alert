@@ -1,0 +1,49 @@
+# ============================================================
+#  קובץ ההגדרות שלך – כאן קובעים מה לחפש. אפשר להוסיף כמה כללים שרוצים.
+#  כל כלל = חיפוש אחד. כשמגרש חדש מתפנה והוא מתאים – מקבלים התראה בפוש (ntfy).
+# ============================================================
+
+settings:
+  # ערוץ ההתראות שלך באפליקציית ntfy (שם סודי וארוך – אל תשתף)
+  ntfy_topic: "padel-HFGACQwbARaSzZ81vLyqHQiP"
+  # האם לשלוח בריצה הראשונה גם את מה שכבר פנוי עכשיו? (true = כן)
+  notify_existing_on_first_run: true
+
+rules:
+  # --- כלל 1: כל יום ב-7 הימים הקרובים, שעת התחלה בין 20:00 ל-21:00 ---
+  - name: "ערב 20:00-21:00 – השבוע הקרוב"
+    enabled: true
+    type: daily          # daily = כל יום בטווח ימים קדימה
+    days: 7              # כמה ימים קדימה (כולל היום)
+    from: "20:00"        # שעת התחלה מ-
+    to: "21:00"          # שעת התחלה עד
+    duration: 90         # 60 / 90 / 120 דקות
+    clubs: all           # all או רשימה, למשל ["תל אביב", "רמת גן"] (חיפוש לפי חלק מהשם)
+    providers: all       # all או רשימה: [LAZUZ, GoPlay, "Top Padel", Matchpointer]
+    indoor: false        # true = רק מגרשים מקורים
+    shade: false         # true = רק מגרשים עם הצללה
+
+  # --- כלל 2 (חזרתיות): כל יום ראשון בשעה 20:00 ---
+  - name: "ראשון קבוע 20:00"
+    enabled: true
+    type: weekly         # weekly = יום קבוע בשבוע
+    weekday: sunday      # monday tuesday wednesday thursday friday saturday sunday
+    weeks_ahead: 2       # כמה שבועות קדימה לבדוק
+    from: "20:00"
+    to: "20:00"
+    duration: 90
+    clubs: ["תל אביב", "רמת גן"]
+    providers: all
+
+  # --- דוגמה לכלל כבוי (לשנות ל-true כדי להפעיל) ---
+  - name: "שישי בוקר מקורה"
+    enabled: false
+    type: weekly
+    weekday: friday
+    weeks_ahead: 2
+    from: "08:00"
+    to: "10:00"
+    duration: 60
+    clubs: all
+    providers: all
+    indoor: true
